@@ -1,0 +1,29 @@
+# Unzips the OrderRecords file.
+unzip OrderRecords.zip
+
+# Moves into the unziped OrderRecords directory.
+cd OrderRecords
+
+# Creates directory called AllRecords.
+mkdir AllRecords;
+
+# Moves 2012, 2013, 2014, 2015, 2016, and 2017 folders into AllRecords folder.
+mv 2012 AllRecords; mv 2013 AllRecords; mv 2014 AllRecords; mv 2015 AllRecords; mv 2016 AllRecords; mv 2017 AllRecords;
+
+# Moves to AllRecords directory.
+cd AllRecords
+
+# Creates VIPCustomerOrders folder.
+mkdir VIPCustomerOrders
+
+# Finds all instancs of Michael Davis, then saves the data into a file along with line number and file location of name.
+grep -n 'Michael,Davis' 2012/order_records.csv.aa 2013/order_records.csv.ab 2014/order_records.csv.ac 2015/order_records.csv.ad 2016/order_records.csv.ae 2017/order_records.csv.af | awk -F, '{print $1,$2}' > VIPCustomerOrders/michael_davis_orders.output.txt
+
+# Finds all instances of Michael Campbell, then saves the data into a file along with line number and file location of name.
+grep -n 'Michael,Campbell' 2012/order_records.csv.aa 2013/order_records.csv.ab 2014/order_records.csv.ac 2015/order_records.csv.ad 2016/order_records.csv.ae 2017/order_records.csv.af | awk -F, '{print $1,$2}' > VIPCustomerOrders/michael_campbell_orders.output.txt
+
+# Compiles all records of customer details into a single text file.
+cat 2012/order_records.csv.aa 2013/order_records.csv.ab 2014/order_records.csv.ac 2015/order_records.csv.ad 2016/order_records.csv.ae 2017/order_records.csv.af > results.txt
+
+# Finds instances of Michael Davis and Michael Campbell within the 'results' file, then prints them to screen and exports the results into the 'VIPCustomerDetail' file.
+grep -E 'Michael,Davis|Michael,Campbell' results.txt | awk -F, '{print $1,$2,$5,$6}' |tee VIPCustomerDetails.md
