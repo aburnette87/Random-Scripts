@@ -10,9 +10,6 @@ adminList = [
     }
 ]
 
-# Build your login functions below
-##==============================##
-
 # Function that asks for user's credentials
 def getCreds():
 
