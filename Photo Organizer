@@ -1,5 +1,8 @@
+# Unzips zipped Pictures folder
+unzip Pictures
+
 # Create directories JPG, PNG, TIFF, PictureCounts.
-mkdir JPG PNG TIFF PictureCounts;
+mkdir JPG PNG TIFF;
 
 # Locates file names ending in '.jpg' and copies them to 'JPG' folder.
 find -name *.jpg -exec mv {} JPG \;
@@ -12,24 +15,19 @@ find -name *.tiff -exec mv {} TIFF \;
 
 # FOR JPG FILES
 	# Count the number of JPG files and stores output into file.
-	find -iname *.jpg | wc -l > PictureCounts/JPGWordCounts.md;
-		# Reads result from line 15 an stores that result as variable.
-		read JPG < PictureCounts/JPGWordCounts.md;
-			# Prints variable from line 17 into phrase.
-			echo "There are $JPG JPG files.";
+	find -iname *.jpg | wc -l >> PictureCounts.md;
+		# Reads from PictureCounts file and prints JPG picture count to screen.
+		awk '{if(NR==1) print $0 " JPGs"}' PictureCounts.md
 
 # FOR PNG FILES
 	# Count the number of PNG files and prints the result on screen.
-	find -iname *.png | wc -l > PictureCounts/PNGWordCounts.md;
-		# Reads result from line 23 an stores that result as variable.
-		read PNG < PictureCounts/PNGWordCounts.md;
-			# Prints variable from line 25 into phrase.
-			echo "There are $PNG PNG files.";
+	find -iname *.png | wc -l >> PictureCounts.md;
+		# Reads from PictureCounts file and prints PNG picture count to screen.
+		awk '{if(NR==2) print $0 " PNGs"}' PictureCounts.md
+
 
 # FOR TIFF FILES
 	# Count the number of TIFF files and prints the result on screen.
-	find -iname *.tiff | wc -l > PictureCounts/TIFFWordCounts.md;
-		# Reads result from line 31 an stores that result as variable.
-		read TIFF < PictureCounts/TIFFWordCounts.md;
-			# Prints variable from line 33 into phrase.
-			echo "There are $TIFF TIFF files.";
+	find -iname *.tiff | wc -l >> PictureCounts.md;
+		# Reads from PictureCounts file and prints JPG picture count to screen.
+		awk '{if(NR==3)print $0 " TIFFs"}' PictureCounts.md
