@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+bin=/opt/splunk/bin/splunk
+
+docker exec -u splunk -it splunk bash -c "$bin stop && $bin clean; $bin start"
